@@ -38,9 +38,13 @@ export default function Home() {
       });
   }, []);
 
+  const getValue = (obj: CountryMedals, key: keyof CountryMedals): number => {
+    return obj[key] as number;
+  };
+
   const sortedData = useMemo(() => {
     const sorted = [...rawData].sort((a, b) => {
-      const primary = b[sortKey as keyof CountryMedals] - a[sortKey as keyof CountryMedals];
+      const primary = getValue(b, sortKey as keyof CountryMedals) - getValue(a, sortKey as keyof CountryMedals);
       if (primary !== 0) return primary;
 
       if (sortKey === 'total') return b.gold - a.gold;
@@ -48,7 +52,19 @@ export default function Home() {
       return b.gold - a.gold;
     });
     return sorted.slice(0, 10);
-  }, [rawData, sortKey]);
+    }, [rawData, sortKey]);
+
+  // const sortedData = useMemo(() => {
+  //   const sorted = [...rawData].sort((a, b) => {
+  //     const primary = b[sortKey as keyof CountryMedals] - a[sortKey as keyof CountryMedals];
+  //     if (primary !== 0) return primary;
+
+  //     if (sortKey === 'total') return b.gold - a.gold;
+  //     if (sortKey === 'gold') return b.silver - a.silver;
+  //     return b.gold - a.gold;
+  //   });
+  //   return sorted.slice(0, 10);
+  // }, [rawData, sortKey]);
 
   return (
     <main>
