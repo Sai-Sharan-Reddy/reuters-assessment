@@ -54,18 +54,6 @@ export default function Home() {
     return sorted.slice(0, 10);
     }, [rawData, sortKey]);
 
-  // const sortedData = useMemo(() => {
-  //   const sorted = [...rawData].sort((a, b) => {
-  //     const primary = b[sortKey as keyof CountryMedals] - a[sortKey as keyof CountryMedals];
-  //     if (primary !== 0) return primary;
-
-  //     if (sortKey === 'total') return b.gold - a.gold;
-  //     if (sortKey === 'gold') return b.silver - a.silver;
-  //     return b.gold - a.gold;
-  //   });
-  //   return sorted.slice(0, 10);
-  // }, [rawData, sortKey]);
-
   return (
     <main>
       <h1>Olympic Medal Count</h1>
